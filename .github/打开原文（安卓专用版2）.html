@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>打开原文</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+    body {
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      margin: 0 auto;
+      width: 80%;
+      max-width: 600px;
+      padding: 50px 0;
+    }
+    .input-field input[type="text"]:focus {
+      border-bottom: 2px solid #007bff;
+      box-shadow: none;
+    }
+    .input-field input[type="text"]::placeholder {
+      font-size: 16px;
+      color: #9e9e9e;
+      opacity: 1;
+    }
+    .input-field label {
+      font-size: 16px;
+      color: #9e9e9e;
+    }
+    .btn {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 50px;
+      padding: 0 30px;
+      font-size: 16px;
+      height: 40px;
+      line-height: 40px;
+      margin-left: 20px;
+      text-transform: none;
+    }
+    .btn:hover {
+      background-color: #0069d9;
+    }
+    .btn:focus {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form>
+      <div class="input-field">
+        <i class="material-icons prefix">search</i>
+        <label for="input">请输入频道中复制的代码</label>
+        <input type="text" id="input" placeholder="19位代码或7位代码">
+      </div>
+      <a class="btn waves-effect waves-light" id="submit" disabled>
+        显示原文
+        <i class="material-icons right">open_in_new</i>
+      </a>
+    </form>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    const input = document.getElementById('input');
+    const submit = document.getElementById('submit');
+    input.addEventListener('input', () => {
+      const value = input.value;
+      let matchUrl = '';
+      if (value.match(/^\d{0,19}$/)) {
+        matchUrl = `https://www.douyin.com/video/${value}`;
+      }
+      if (value.match(/^[a-zA-Z0-9]{7}$/)) {
+        matchUrl = `https://v.douyin.com/${value}`;
+      }
+      if (matchUrl) {
+        submit.href = matchUrl;
+        submit.removeAttribute('disabled');
+      } else {
+        submit.setAttribute('disabled', true);
+      }
+    });
+  </script>
+</body>
+</html>
